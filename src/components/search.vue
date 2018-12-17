@@ -17,12 +17,15 @@
     <div class="container py-5">
       <div>
         <div class="card-columns">
+          <!--for-loop for each element in the array to be printed-->
           <div class="card" v-for="item in this.collection.items">
+            <!--if items.links is not undefined it means that array and results exists -->
             <div v-if="typeof item.links != 'undefined'" >
               <a style="cursor: pointer;" :title="item.data[0].title" @click="getAsset(item.data[0].nasa_id)">
               <div v-for="info in item.links" class=""><img width="100%" v-bind:src="info.href" alt=""/></div>
               </a>
             </div>
+            <!--looking at the api if the arrya does not have links array in, it means the asset its a video-->
             <div style="background: black;" v-else >
               <div class="pt-3 m-1">
                 <a style="cursor: pointer;" @click="getAsset(item.data[0].nasa_id)">

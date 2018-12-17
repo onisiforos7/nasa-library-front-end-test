@@ -42,7 +42,7 @@ export default {
   },
   methods:{
     getMedia: function () {
-
+        //Get Asset's information by nasaId
         fetch("https://images-api.nasa.gov/asset/"+this.nasaId)
           .then(response => response.json())
           .then(data => {
@@ -54,6 +54,7 @@ export default {
           .finally(() => this.loading = false)
     },
     getMetadataUrl:function(){
+      //Get Asset's metadata API by nasaId
       fetch("https://images-api.nasa.gov/metadata/"+this.nasaId)
         .then(response => response.json())
         .then(data => {
@@ -64,10 +65,10 @@ export default {
     getAssetInfo: function(){
       const url = this.metadataUrl;
       console.log("url=="+url.toString());
-
+        //Using the API from getMetadataUrl to  get Assets information
       fetch(url.toString())
         .then(response => response.json())
-        .then(data => {''
+        .then(data => {
           this.title = data["AVAIL:Title"];
           this.description = data["AVAIL:Description"];
           this.mediaType = data["AVAIL:MediaType"];
@@ -75,6 +76,7 @@ export default {
         .catch(error => {
           console.log(error);
         })
+        //loading is introduced but functionality not implemented with front-end yet.
         .finally(() => this.loading = false)
     }
   }
